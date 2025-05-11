@@ -7,7 +7,7 @@ import java.util.List;
 
 public class Basket {
     private final int MIN_SUM_ORDER = 300;          // мин.сумма заказа (только товары)
-    private int discount;                           // скидка
+    private Discount discount;                      // скидка
     private int priceDelivery;                      // цена доставки
     private int sumCashback;                        // сумма кэшбэка
     private int sumProduct;                         // сумма только за товары
@@ -25,13 +25,13 @@ public class Basket {
         calcDelivery(street);
         if (sumProduct >= MIN_SUM_ORDER) {
             if (applyDiscount()) {
-                amountToBePaid = sumProduct + priceDelivery - discount;
+                amountToBePaid = sumProduct + priceDelivery - discount.getDISCOUNT();
                 System.out.printf(
                         "Скидка %d₽ применена!\n" +
                                 "Доставка: %d₽\n" +
                                 "Итого к оплате: %d₽\n" +
                                 "Ваш кэшбэк за покупку = %d\n",
-                        discount, priceDelivery, amountToBePaid, sumCashback
+                        discount.getDISCOUNT(), priceDelivery, amountToBePaid, sumCashback
                 );
             } else {
                 amountToBePaid = sumProduct + priceDelivery;
@@ -66,10 +66,10 @@ public class Basket {
     // проверка на применение скидки
     public boolean applyDiscount() {
         if (new DiscountFrom2000().applyDiscount(sumProduct)) {
-            discount = new DiscountFrom2000().getDISCOUNT();
+            discount = new DiscountFrom2000();
             return true;
         } else if (new DiscountFrom1000().applyDiscount(sumProduct)) {
-            discount = new DiscountFrom1000().getDISCOUNT();
+            discount = new DiscountFrom1000();
             return true;
         }
         return false;
