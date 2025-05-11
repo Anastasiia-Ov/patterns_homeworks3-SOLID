@@ -1,14 +1,13 @@
 package Products;
 
 import Basket.Cashback;
-import Filtration.Rating;
 
 public class Product {
-    private String name;             // название товара
+    private final String name;             // название товара
     private int price;               // цена
-    private String brand;            // торговая марка
-    private String category;         // категория товара
-    private Rating rating = new Rating();  // рейтинг
+    private final String brand;            // торговая марка
+    private final String category;         // категория товара
+    private Rating rating = new Rating(); // рейтинг
     private Cashback cashback;             // кэшбэк
 
     public Product(String name, String brand, int price, String category) {
@@ -17,10 +16,7 @@ public class Product {
         this.price = price;
         this.category = category;
         rating.randomRating();
-        cashback = new Cashback(this.category, price);
-    }
-
-    public Product() {
+        cashback = new Cashback(category, price);
     }
 
     @Override

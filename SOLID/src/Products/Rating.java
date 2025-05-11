@@ -1,4 +1,4 @@
-package Filtration;
+package Products;
 
 import java.util.Random;
 

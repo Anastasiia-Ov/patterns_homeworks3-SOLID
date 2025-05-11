@@ -14,10 +14,17 @@ public class Delivery {
             "Гриболевская", 160
     );
 
+    // проверка доставки на адрес
     public boolean isDelivery(String street) {
-        return streets.containsKey(street);
+        if (streets.containsKey(street)) {
+            return true;
+        } else {
+            System.out.println("Нет доставки по данному адресу");
+            return false;
+        }
     }
 
+    // расчет стоимости доставки
     public int calcDelivery(String street) {
         return streets.get(street);
     }
